@@ -13,7 +13,10 @@ export type PokemonState = {
 }
 
 export type PokemonAction = {
-    type: string;
-    payload: PokemonState;
+    type: string,
+    payload: PokemonState,
+    (x:PokemonAction):PokemonAction;   
+
+
 };
   
