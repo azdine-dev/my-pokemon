@@ -1,0 +1,45 @@
+
+  
+  /* Footer */
+  footer {
+    background-color: var(--card_gray);
+    padding: 10px;
+    color: white;
+    text-align: center;
+  }
+  
+  footer p {
+    margin-bottom: 0;
+  }
+  
+  .credits-text {
+    color: #ddd;
+    font-family: "OldSansBlack";
+  }
+  
+  footer .baz {
+    color: white;
+    transition: 1s all;
+    font-family: "OldSansBlack";
+  }
+  
+  footer .baz:hover {
+    color: white;
+    text-decoration: none;
+    opacity: 0.9;
+  }
+  
+  footer .view-code {
+    color: #ddd;
+    display: block;
+    transition: 1s all;
+    font-size: 12px;
+  }
+  
+  footer .view-code:hover {
+    color: #ddd;
+    text-decoration: none;
+    opacity: 0.9;
+  }
+  
+  
