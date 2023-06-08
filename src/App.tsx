@@ -1,10 +1,13 @@
 import { AppRouter } from './routes';
+import {Provider} from 'react-redux'
+import store from './redux/store'
+import Pokedex from './container/pokedex/pokedex';
 
 function App() {
   return (
-    <div>
-       <AppRouter />;
-    </div>
+    <Provider store={store}>
+       <Pokedex />;
+    </Provider>
   );
 }
 

@@ -12,27 +12,32 @@ import {
  } from "../constants/action-types.contstants"
 
  export interface Pokemon {
-    id: number
-    name: string
-    base_experience: number
-    height: number
-    is_default: boolean
-    order: number
-    weight: number
-    abilities: object[]
-    forms: object[]
-    game_indices: object[]
-    held_items: object[]
-    location_area_encounters: string
-    moves: object[]
-    sprites: object
-    species: object
-    stats: object[]
-    types: object[]
+    id: string
+    name: string,
+    url :string,
+    abilities : any[],
+    evolution_chain :any
+    species : {
+        url :string
+    }
+    types : PokemonTypes[],
+    loading:boolean,
+    stats:any[],
+    measurements:{weight: number, height: number},
+    sprites:any[],
+    moves:any[],
+ }
+
+interface  PokemonTypes {
+    type : {
+        url :string,
+        damage_relations : string,
+    },  
+   
 }
 interface FetchPokemonSuccessAction {
     type: typeof FETCH_POKEMON_SUCCESS,
-    pokemons : Pokemon
+    pokemons : Pokemon[]
 }
 
 interface AddPokemonSucessAction {

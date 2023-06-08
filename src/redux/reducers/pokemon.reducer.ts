@@ -1,19 +1,23 @@
-import {Reducer} from 'redux';
 import * as types from '../../constants/action-types.contstants';
 import initState from './initial-state';
 import { PokemonActionTypes } from '../../types/pokemon.types';
 import * as URL from '../../constants/url';
 
 
-const pokemonReducer: Reducer = (
-  state = initState.pokemons,
+export interface PokemonState {
+    pokemons?: any[];
+    selectedPokemon? :any
+  }
+
+  export default function pokemonReducer(
+  state = initState,
   action: PokemonActionTypes,
-) => {
+) :  PokemonState{
     switch (action.type) {
         case types.FETCH_POKEMON_SUCCESS:
-          return {...state, pokemons: action.pokemons};
+          return {...state, pokemons: action.pokemons };
         case types.ADD_POKEMON_SUCCESS:
-          return {...state, pokemons:[...state.pokemons,...action.pokemons]};
+          return {...state, pokemons:[...state.pokemons, ...action.pokemons]};
         case types.SELECTED_POKEMON:
           return { ...state, selectedPokemon: {...action.pokemon, loading:true} };
         case types.GET_POKEMON_SUCCESS:
@@ -35,4 +39,3 @@ const pokemonReducer: Reducer = (
     }
 }
 
-export default pokemonReducer;
