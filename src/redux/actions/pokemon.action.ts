@@ -12,7 +12,7 @@ export const selectPokemonAction = (pokemon :any) => ({
 
 export const fetchPokemonAction = (payload :any) => ({
   type: FETCH_POKEMON_REQUEST,
-  payload: {},
+  payload: payload,
 });
 
 export const addPokemonAction = (url :any) => ({

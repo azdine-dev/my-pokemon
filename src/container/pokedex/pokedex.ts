@@ -9,7 +9,8 @@ function mapStateToProps (state: RootState) : IPokedex {
     return {
         pokemons : (state.pokemon as PokemonState).pokemons!,
         selectedPokemon : (state.pokemon as PokemonState).selectedPokemon,
-        ui : state.ui
+        ui : state.ui,
+        
     };
 };
 

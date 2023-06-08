@@ -28,7 +28,8 @@ export const getPokemonAnimatedSpriteFromURL = (url :string)=>{
   return spriteUrl;
 }
 
-export const getURLFromPayload = ({ query , id, param } :any)=>{
+export const getURLFromPayload = (payload :any)=>{
+  const { query , id, param } = payload;
   var result = query+'/';
   if(id)
     result+=id+'/'

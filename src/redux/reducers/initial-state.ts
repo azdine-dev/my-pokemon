@@ -21,7 +21,7 @@ const initialPokemon:Pokemon = {
 const initialPokemons : Pokemon [] = [initialPokemon]
  
 const initState =  {
-  pokemons : initialPokemons,
+  pokemons : [],
   selectedPokemon : initialPokemon,
   ui:{
     searchPayload:SEARCH_PAYLOAD.all_pokemon,

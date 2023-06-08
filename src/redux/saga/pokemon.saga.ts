@@ -4,9 +4,12 @@ import { getPokemonDisplayImageFromName, getPokemonBaseSpriteFromURL, getIDfromU
 import * as types from '../../constants/action-types.contstants';
 import { Pokemon } from '../../types/pokemon.types';
 
-export function* fetchPokemonSaga(payload :any) :any{
+export function* fetchPokemonSaga(action :any) :any{
   try {
+    const {payload} =action;
     const url = getURLFromPayload(payload);
+
+    console.log(payload , 'dsfsdfdsfsdf');
     const response = yield call(PokeFetch, url);
     var pokemons;
     var pagination;
