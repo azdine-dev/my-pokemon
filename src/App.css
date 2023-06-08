@@ -115,6 +115,10 @@ body
   width: 100%;
 }
 
+overflow-visible {
+  overflow: visible;
+}
+
 /*
     Animations
 */

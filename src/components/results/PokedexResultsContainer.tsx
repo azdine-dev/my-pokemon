@@ -1,5 +1,6 @@
 import React ,{Component}from 'react';
 import classes from './PokdexResults.module.css';
+import Loader from '../loader/Loader';
 
 
 export interface IPokedexResults {
@@ -14,17 +15,20 @@ export class  PokedexResultsContainer extends Component<IPokedexResults> {
        const { pokemons, pagination } = this.props;
        
        return(
-        <section className= "section pokedex-results overflow-visible">
-          <ul className="results" style={{height : 'auto'}}>
-             {pokemons.map(pokemon =>{
-                return( 
-                 <li key={pokemon.id}>
-                   {pokemon.name}
-                </li>)
-             })}
-            
-          </ul>
-        </section>
+        <div id={classes['pokedex-list-wrapper']}>
+        <section className={classes['container-card']}>
+                {pokemons.length === 0 ? (
+                    <Loader/>
+                    ) : (
+                        pokemons
+                        .sort((a, b) => a.id - b.id)
+                        .map((el,index) => (
+                            <h1>{el.name}</h1>
+                        ))
+                    )
+                }
+         </section>
+        </div>
        )  
      } 
     

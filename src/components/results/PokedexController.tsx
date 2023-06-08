@@ -8,7 +8,6 @@ const  PokedexControl : React.FC<{pokemons:any}> = ({pokemons}) =>{
     <div >
       {pokemons ?
         <div>
-           {pokemons.length} 
           <PokedexResults/>
         </div>
         : "No Results"
