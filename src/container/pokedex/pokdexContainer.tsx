@@ -4,6 +4,8 @@ import { Dispatch, Action, AnyAction } from 'redux';
 import PokedexHeader from '../../components/Header/PokedexHeader';
 import PokedexFooter from '../../components/Footer/PodexFooter';
 import { fetchPokemonAction } from '../../redux/actions/pokemon.action';
+import PokedexResults from '../../components/results/PokedexResults';
+import PokedexControl from '../../components/results/PokedexController';
 
 
 export interface IPokedex<A extends Action = AnyAction> {
@@ -20,18 +22,20 @@ export class  PokedexContainer extends Component<IPokedex> {
 
     render(): React.ReactNode {
       const { pokemons, selectedPokemon, ui } = this.props;
-      console.log(pokemons, 'POKEEEE');
       
       return(
         <div>
         {pokemons && selectedPokemon
-           ? <div> 
+           ? (<div> 
                 <PokedexHeader/>
+                  <div>
+                     <PokedexControl pokemons={pokemons} />
+                  </div>
                 <PokedexFooter/>
 
-             </div>
+             </div>)
               :
-              <div id={classes.pokedex}>
+              (<div id={classes.pokedex}>
                 <div id={classes['pokedex-loading']}>
                   <div className={classes.loader} style={{
                     width: "200px",
@@ -39,7 +43,7 @@ export class  PokedexContainer extends Component<IPokedex> {
                     }}>
                   </div>
                 </div>
-              </div>
+              </div>)
         
           }
          </div>

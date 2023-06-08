@@ -13,8 +13,10 @@ export interface PokemonState {
   state = initState,
   action: PokemonActionTypes,
 ) :  PokemonState{
+    console.log(action, 'HHHH')
     switch (action.type) {
         case types.FETCH_POKEMON_SUCCESS:
+           
           return {...state, pokemons: action.pokemons };
         case types.ADD_POKEMON_SUCCESS:
           return {...state, pokemons:[...state.pokemons, ...action.pokemons]};

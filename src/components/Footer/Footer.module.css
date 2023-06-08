@@ -1,58 +1,39 @@
 
   
   /* Footer */
-  .footer {
-    background: #e9e9e9;
-   font-family: 'Roboto', sans-serif;
-   text-align: center;
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
+  #pokedex-footer{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom:0;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    padding:0 20px;
+    box-sizing: border-box;
+    text-align: left;
+    background:#212121;
+    overflow: hidden;
   }
-  
-  .footer span {
-    color: #666;
+  #pokedex-footer > p{
+    color: #FFF;
+    margin:7px;
+    padding:0;
     font-size: 12px;
-    display: block;
-    position: absolute;
-    bottom: 10px;
-    position: absolute;
-    width: 90%;
-    left: 50%;
-    top: 45%;
-    bottom: auto;
-    right: auto;
-    transform: translateX(-50%) translateY(-50%);
+  }
+  #pokedex-footer a{
+    color: #AAA;
+  }  
+  #pokedex-footer{
+    white-space: normal;
     text-align: center;
   }
-  
-  .credits-text {
-    color: #ddd;
-    font-family: "OldSansBlack";
+  #pokedex-footer > p{
+    font-size: 11px;
   }
-  
-  footer .baz {
-    color: white;
-    transition: 1s all;
-    font-family: "OldSansBlack";
+
+  @media(max-width:500px){
+    #pokedex-footer > p{
+      font-size: 10px;
+    }
   }
-  
-  footer .baz:hover {
-    color: white;
-    text-decoration: none;
-    opacity: 0.9;
-  }
-  
-  footer .view-code {
-    color: #ddd;
-    display: block;
-    transition: 1s all;
-    font-size: 12px;
-  }
-  
-  footer .view-code:hover {
-    color: #ddd;
-    text-decoration: none;
-    opacity: 0.9;
-  }
-  
-  

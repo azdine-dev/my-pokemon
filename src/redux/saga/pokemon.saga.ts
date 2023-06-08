@@ -1,4 +1,5 @@
-import { put, call} from 'redux-saga/effects';
+import { put, call,fork,all} from 'redux-saga/effects';
+
 import { PokeFetch} from '../../api';
 import { getPokemonDisplayImageFromName, getPokemonBaseSpriteFromURL, getIDfromURL,getURLFromPayload, getPokemonAnimatedSpriteFromURL } from '../../utils/pokemon-operations';
 import * as types from '../../constants/action-types.contstants';
@@ -9,8 +10,9 @@ export function* fetchPokemonSaga(action :any) :any{
     const {payload} =action;
     const url = getURLFromPayload(payload);
 
-    console.log(payload , 'dsfsdfdsfsdf');
     const response = yield call(PokeFetch, url);
+    console.log(response , 'dsfsdfdsfsdf');
+
     var pokemons;
     var pagination;
     switch(payload.name){
@@ -62,11 +64,11 @@ export function* fetchPokemonSaga(action :any) :any{
         break;
     }
 
-    yield [
-      put({ type: types.UPDATE_PAGINATION, pagination}),
-      put({ type: types.FETCH_POKEMON_SUCCESS, pokemons }),
-      put({ type: types.SELECTED_POKEMON, pokemon: pokemons[0] }),
-    ];
+    yield all([
+        put({ type: types.UPDATE_PAGINATION, pagination}),
+        put({ type: types.FETCH_POKEMON_SUCCESS, pokemons }),
+        put({ type: types.SELECTED_POKEMON, pokemon: pokemons[0] }),
+    ]);
   } catch (error) {
     console.log(error);
     yield put({ type: 'FETCH_POKEMON_ERROR', error });

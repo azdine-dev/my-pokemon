@@ -97,6 +97,24 @@ body
     background-color: currentColor;
 }
 
+
+.section.overflow-visible {
+    *zoom: 1;
+    overflow: visible;
+}
+.section {
+  padding: 1em 0;
+}
+.content-wrapper, .section {
+  background: transparent  left top;
+  background-size: 100% 1px;
+  display: block;
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 1024px;
+  width: 100%;
+}
+
 /*
     Animations
 */
