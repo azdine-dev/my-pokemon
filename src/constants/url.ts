@@ -1,5 +1,7 @@
 export const POKE_API_ENDPOINT = "https://pokeapi.co/api/v2/";
 export const POKEMON_IMAGE_URL = "https://img.pokemondb.net/artwork/";
+export const POKEMON_IMG_BASE_URL = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other';
+
 export const POKEMON_IMAGE_NODATA_URL =
     "https://img.pokemondb.net/artwork/bulbasaur.jpg";
 export const POKEMON_SPRITES_URL =

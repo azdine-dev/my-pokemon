@@ -1,19 +1,19 @@
-import React from 'react';
-import PokedexResults from './PokedexResults';
+import React from 'react'
+import PokedexResults from './PokedexResults'
 
 
 
 const  PokedexControl : React.FC<{pokemons:any}> = ({pokemons}) =>{
   return (
-    <div >
+    <div className="container-fluid">
       {pokemons ?
-        <div>
+        
           <PokedexResults/>
-        </div>
-        : "No Results"
+        
+        : 'No Results'
       }
-    </div>
-  );
+     </div>
+  )
 }
 
-export default PokedexControl;
+export default PokedexControl

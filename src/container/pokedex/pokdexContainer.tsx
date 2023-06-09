@@ -4,7 +4,6 @@ import { Dispatch, Action, AnyAction } from 'redux';
 import PokedexHeader from '../../components/Header/PokedexHeader';
 import PokedexFooter from '../../components/Footer/PodexFooter';
 import { fetchPokemonAction } from '../../redux/actions/pokemon.action';
-import PokedexResults from '../../components/results/PokedexResults';
 import PokedexControl from '../../components/results/PokedexController';
 
 
@@ -28,9 +27,9 @@ export class  PokedexContainer extends Component<IPokedex> {
         {pokemons && selectedPokemon
            ? (<div> 
                 <PokedexHeader/>
-                  <div>
-                     <PokedexControl pokemons={pokemons} />
-                  </div>
+                  
+                <PokedexControl pokemons={pokemons} />
+                  
                 <PokedexFooter/>
 
              </div>)

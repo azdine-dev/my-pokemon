@@ -2,14 +2,13 @@ import {
      FETCH_POKEMON_SUCCESS,
      ADD_POKEMON_SUCCESS,
      SELECTED_POKEMON,
-     GET_POKEMON_SUCCESS,
      GET_POKEMON_ABILITY_SUCCESS,
      GET_POKEMON_SPECIES_SUCCESS,
      GET_POKEMON_TYPE_SUCCESS,
      GET_POKEMON_EVO_CHAIN_SUCCESS,
      POKEMON_SPRITE_ERROR,
      POKEMON_IMAGE_ERROR
- } from "../constants/action-types.contstants"
+ } from '../constants/action-types.contstants'
 
  export interface Pokemon {
     id: string
@@ -36,61 +35,71 @@ interface  PokemonTypes {
    
 }
 interface FetchPokemonSuccessAction {
-    type: typeof FETCH_POKEMON_SUCCESS,
-    pokemons : Pokemon[]
+    type: string,
+    pokemons : any[]
 }
+
+
 
 interface AddPokemonSucessAction {
-    type : typeof ADD_POKEMON_SUCCESS,
-    pokemons : Pokemon[]
+    type : string,
+    pokemons? : any[],
+    pokemon?:any,
+    abilities? :any,
+    species? :string,
+    evolution_chain? :string,
+    types? : string
+
 }
 
+
 interface SelectedPokemonAction {
-    type : typeof SELECTED_POKEMON,
-    pokemon :Pokemon
+    type : string,
+    pokemon :any
 }
 
 interface GetPokemonSuccess{
-    type : typeof GET_POKEMON_SUCCESS,
-    pokemon : Pokemon
+    type : string,
+    pokemon : any
 }
 
 interface GetPokemonAbilitySuccess {
-    type : typeof GET_POKEMON_ABILITY_SUCCESS,
+    type : string,
     abilities : string
 }
 
 interface  GetPokemonSpeciesSuccess {
-    type : typeof GET_POKEMON_SPECIES_SUCCESS,
+    type : string,
     species : string 
 }
 
 interface GetPokemonTypeSuccess {
-    type : typeof GET_POKEMON_TYPE_SUCCESS,
+    type : string,
     types : string
 }
 
 interface GetPokemonEvoChainSuccess {
-    type : typeof GET_POKEMON_EVO_CHAIN_SUCCESS,
+    type : string,
     evolution_chain :string
 }
 
 interface PokemonSpiritErrorAction {
-    type : typeof POKEMON_SPRITE_ERROR
+    type : string
 }
 
 interface PokmonImageErrorAction {
-    type : typeof POKEMON_IMAGE_ERROR
+    type : string
 }
 
 export type PokemonActionTypes = 
-| FetchPokemonSuccessAction
+
 |AddPokemonSucessAction
-|SelectedPokemonAction
-|GetPokemonSuccess
-|GetPokemonAbilitySuccess
-|GetPokemonSpeciesSuccess
-|GetPokemonTypeSuccess
-|GetPokemonEvoChainSuccess
-|PokemonSpiritErrorAction
-|PokmonImageErrorAction;
+// | FetchPokemonSuccessAction
+// |SelectedPokemonAction
+// |GetPokemonSuccess
+// |GetPokemonAbilitySuccess
+// |GetPokemonSpeciesSuccess
+// |GetPokemonTypeSuccess
+// |GetPokemonEvoChainSuccess
+// |PokemonSpiritErrorAction
+// |PokmonImageErrorAction;

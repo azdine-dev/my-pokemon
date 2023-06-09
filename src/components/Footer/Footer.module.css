@@ -27,6 +27,7 @@
   #pokedex-footer{
     white-space: normal;
     text-align: center;
+    margin-top: 5em;
   }
   #pokedex-footer > p{
     font-size: 11px;
