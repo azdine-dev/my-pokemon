@@ -1,0 +1,86 @@
+#pokedex{
+    position: absolute;
+    top:50px;
+    left:0;
+    width: 100%;
+    bottom:50px;
+    text-align: left;
+    background: #37474F; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#455A64, #37474F,#455A64); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#455A64, #37474F,#455A64); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#455A64, #37474F,#455A64); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#455A64, #37474F,#455A64); /* Standard syntax */
+  }
+  #pokedex-loading{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    text-align: center;
+ }
+ #pokedex-loading:after{
+    content:'';
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 100%;
+}
+
+.loader{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    background-size: 100% 100%;
+    background-image: url(../../img/pokeball.png);
+    animation: spin 1s infinite;
+    -webkit-animation: spin 1s infinite;
+  }
+
+  @keyframes spin{
+    0%{
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    50%{
+      -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      transform: rotate(180deg);
+    }
+    100%{
+      -webkit-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  
+  @-webkit-keyframes spin{
+    0%{
+      -webkit-transform: rotate(0deg);
+      -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    50%{
+      -webkit-transform: rotate(180deg);
+      -ms-transform: rotate(180deg);
+      transform: rotate(180deg);
+    }
+    100%{
+      -webkit-transform: rotate(360deg);
+      -ms-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes percent-bar {
+     0% { width: 0; }
+  }
+  @keyframes percent-bar {
+     0% { width: 0; }
+  }
+  @-webkit-keyframes opacity-anim {
+     0% { opacity: 0; }
+  }
+  @keyframes  opacity-anim {
+     0% { opacity: 0; }
+  }
+  

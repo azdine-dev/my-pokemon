@@ -1,6 +1,57 @@
 .card-img-top {
     padding: 10px;
-    width: 100px;
+    width: 10px;
     height: 200px;
     margin: 0 auto
 }
+
+.portfolio-wrap {
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 40px;
+    height: 100%;
+    overflow: hidden;
+    background-color: #f3f3f3;
+}
+  
+ .portfolio-wrap img {
+    transition: 0.3s;
+    position: relative;
+    z-index: 1;
+}
+  
+.portfolio-wrap .portfolio-info {
+    background-color: #fff;
+    position: relative;
+    border-top: 1px solid #f3f3f3;
+    z-index: 2;
+  }
+  
+  .portfolio-wrap .portfolio-info h4 {
+    font-size: 18px;
+    font-weight: 600;
+    padding-right: 50px;
+  }
+  
+  .portfolio-wrap .portfolio-info h4 a {
+    color: var(--color-default);
+    transition: 0.3s;
+  }
+  
+  .portfolio-wrap .portfolio-info h4 a:hover {
+    color: var(--color-primary);
+  }
+  
+  .portfolio-wrap .portfolio-info p {
+    color: #6c757d;
+    font-size: 14px;
+    margin-bottom: 0;
+    padding-right: 50px;
+  }
+
+  .portfolio-wrap .portfolio-info span {
+    margin-top: 0px;
+  }
+  
+  .portfolio-wrap:hover img {
+    transform: scale(1.1);
+  }

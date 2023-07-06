@@ -11,7 +11,6 @@ export function* fetchPokemonSaga(action :any) :any{
     const url = getURLFromPayload(payload)
 
     const response = yield call(PokeFetch, url)
-    console.log(response , 'dsfsdfdsfsdf')
 
     var pokemons
     var pagination
@@ -91,10 +90,10 @@ export function* addPokemonSaga({ url } :any) :any {
         count:response.count,
         nextUrl:response.next
       }
-    yield [
+    yield all([
       put({ type: types.ADD_POKEMON_SUCCESS, pokemons }),
       put({ type: types.UPDATE_PAGINATION, pagination})
-    ]
+    ])
   } catch (error) {
     yield put({ type: 'ADD_POKEMON_ERROR', error })
   }
@@ -102,7 +101,7 @@ export function* addPokemonSaga({ url } :any) :any {
 
 export function* getPokemonSaga( selectedPokemon  :any) :any {
   try{
-    const url = getURLFromPayload({query:'pokemon', id: selectedPokemon.id})
+    const url = getURLFromPayload({query:'pokemon', id: selectedPokemon.selectedPokemon.id})
     const fetchedPokemon = yield call(PokeFetch,url)
     const filteredPokemon={
       loading:false,

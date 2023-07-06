@@ -1,11 +1,11 @@
 import React , {Dispatch } from 'react'
 import { RootState } from '../../redux/reducers'
-import { IPokedexResults, PokedexResultsContainer } from './PokedexResultsContainer'
 import { PokemonState } from '../../redux/reducers/pokemon.reducer'
 import { connect } from 'react-redux'
 import { PokemonActionTypes } from '../../types/pokemon.types'
-import { selectPokemonAction } from '../../redux/actions/pokemon.action'
-import { PokedexBootstrapContainer } from './PokedexBootstrapContainer'
+import { addPokemonAction, getPokemonAction, selectPokemonAction } from '../../redux/actions/pokemon.action'
+import { IPokedexResults, PokedexBootstrapContainer } from './PokedexBootstrapContainer'
+import { toggleShowPopupAction } from '../../redux/actions/ui.action'
 
 
   interface IDispatchPokedexResults {
@@ -17,19 +17,24 @@ import { PokedexBootstrapContainer } from './PokedexBootstrapContainer'
 
 
 function mapStateToProps (state: RootState) : IPokedexResults {
-   console.log(state, 'ST')
    return {
        pokemons : (state.pokemon as PokemonState).pokemons!,
        pagination : state.ui.pagination,
-       onHandleScrollEnd :()=>{}       
+       onHandleScrollEnd :()=>{},
+       onHandleGetPokemon : ()=> {}       
    }
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<PokemonActionTypes>) => ({
 
-	onHandleSelectPokemon: (selectedPokemon :any) => {
-      // dispatch(selectPokemonAction(selectedPokemon))
-      console.log('onHandleScrollEnd')
+   onHandleGetPokemon:(selectedPokemon :any) => {
+      console.log(selectedPokemon,'mmmm')
+      dispatch(toggleShowPopupAction());
+      dispatch(getPokemonAction(selectedPokemon));
+    },
+   onHandleScrollEnd(pagination :any) {
+       console.log(pagination, 'onHandleScrollEnd');
+       dispatch(addPokemonAction(pagination.nextUrl))
    }
 })
 

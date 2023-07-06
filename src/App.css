@@ -1,105 +1,49 @@
+@import url('./styles/vendor/bootstrap-icons.css');
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap');
-
+/* Fonts */
 :root {
-  /** COLOR PALETTE **/
-  --backgroung: rgba(248, 249, 250, 1)
-  --blue: rgba(56, 96, 170, 1)
-  --blue-light: rgba(56, 96, 170, 0.3)
-  --yellow: rgba(253, 216, 93, 1)
-  --yellow-light: rgba(253, 216, 93, 0.5)
-  --red: rgba(241, 75, 61, 1)
-  --red-light: rgba(241, 75, 61, 0.5)
-  --green: rgba(96, 211, 148, 1)
-  --green-light: rgba(96, 211, 148, 0.5)
-  --card: rgba(217, 217, 217, 0.4)
-  /* --card: #D9D9D9 */
-}
-*
-
-
-{
-    box-sizing: border-box;
+  --font-default: "Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-primary: "Montserrat", sans-serif;
+  --font-secondary: 'Poppins', Arial, Verdana
 }
 
-body
-{
-    --bg-color: rgba( 255,255,255,.75 );
-    font-family: Poppins, sans-serif;
-    background-image: linear-gradient( 0deg, var( --bg-color ), var( --bg-color ) ), url( './img/bg.jpg' );
+/* Colors */
+:root {
+  --color-default: #222222;
+  --color-primary: #F6CF57;
+  --color-secondary: #f85a40;
 }
 
-.pokedex-app
-{
-    padding: 1rem;
-    border-radius: 1rem;
+/* Smooth scroll behavior */
+:root {
+  scroll-behavior: smooth;
 }
 
-/*
-    Pokemon type colors
-*/
-.type-normal { --color: #C2C2A1; }
-
-.type-flying { --color: #BAB0D5; }
-
-.type-ghost { --color: #735797; }
-
-.type-dark { --color: #333; }
-
-.type-steel { --color: #CCCCDE; }
-
-.type-ground { --color: #B1736C; }
-
-.type-poison { --color: #7C538C; }
-
-.type-grass { --color: #48D0B0; }
-
-.type-fire { --color: #FB6C6C; }
-
-.type-electric { --color: #FFD86F; }
-
-.type-fairy { --color: #f469a9; }
-
-.type-bug { --color: #C3CE75; }
-
-.type-fighting { --color: #d6b591; }
-
-.type-water { --color: #609FB5; }
-
-.type-psychic { --color: #9B7FA6; }
-
-.type-ice { --color: #7FCCEC; }
-
-.type-rock { --color: #a6aab6; }
-
-.type-dragon { --color: #F9BE00; }
-
-
-.inter-bold{
-  font-family: 'Inter', sans-serif;
-  font-weight: 700;
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+body {
+  font-family: var(--font-secondary);
+  color: var(--color-default);
 }
 
-
-.section.overflow-visible {
-    *zoom: 1;
-    overflow: visible;
-}
-.section {
-  padding: 1em 0;
-}
-.content-wrapper, .section {
-  background: transparent  left top;
-  background-size: 100% 1px;
-  display: block;
-  margin: 0 auto;
-  overflow: hidden;
-  max-width: 1024px;
-  width: 100%;
+a {
+  color: var(--color-primary);
+  text-decoration: none;
 }
 
-overflow-visible {
-  overflow: visible;
+a:hover {
+  color: #00b6a1;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-primary);
 }
 
 /*

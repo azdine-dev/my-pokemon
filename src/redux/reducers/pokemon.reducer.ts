@@ -17,7 +17,8 @@ export interface PokemonState {
         case types.FETCH_POKEMON_SUCCESS:
           return {...state, pokemons: action.pokemons }
         case types.ADD_POKEMON_SUCCESS:
-          const newPokemons = state.pokemons.concat(...action.pokemons as any[])
+          const newPokemons = state.pokemons.concat(...action.pokemons as any[]);
+          console.log(newPokemons, 'newPokemons');
           return {...state, pokemons:newPokemons}
         case types.SELECTED_POKEMON:
           return { ...state, selectedPokemon: {...action.pokemon, loading:true} }

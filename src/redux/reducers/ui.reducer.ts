@@ -11,6 +11,8 @@ const uiReducer: Reducer = (
   )=>{
   switch (action.type) {
     case types.UPDATE_PAGINATION:
+      console.log(action, 'actionHH');
+      console.log(state, 'stateHH')
       return {...state, pagination: action.pagination};
     case types.TOGGLE_SHOW_POPUP:
       return {...state, showPopup: !state.showPopup};
