@@ -16,6 +16,10 @@ export const getPokemonDisplayImageFromID = (id :string)=>{
 // Has SVG.
 return `${ baseURL }/dream-world/${ id }.svg`
 }
+export const getPokemonDisplayImageFromURL= (url:string)=>{
+  const ID = getIDfromURL(url);
+  return getPokemonDisplayImageFromID(ID);
+} 
   
   
 //Its ridiculous to do multiple API call for id *Should've used the GRAPHQL endpoint though

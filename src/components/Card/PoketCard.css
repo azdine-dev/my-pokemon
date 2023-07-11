@@ -10,21 +10,27 @@
     background-color: var( --color );
     color: #FFF;
     box-shadow: 0 0 20px 0 var( --color );
-    border-radius: 3rem;
+    /* border-radius: 3rem; */
     overflow: hidden;
     height: 100%;
-    padding: 3rem 1rem 3rem 3rem;
+    padding  :4rem 6rem 4rem 5.5rem;
     position: relative;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    /* align-items: center; */
     justify-content: space-between;
     will-change: box-shadow, transform;
     transition: .3s all;
 }
+.cardP .default-background{
+    background-color: aqua;
+    color: #FFF;
 
+}
 .cardP .cardP-title
 {
     align-self: flex-start;
+    margin-top :-4.3rem;
 }
 
 .cardP .cardP-title h2
@@ -37,6 +43,12 @@
 .cardP .cardP-title .pokemon-types
 {
     margin-top: 1rem;
+    display: flex;
+}
+
+.cardP .cardP-title .pokemon-types .type
+{
+    margin-left: 0.2rem;
 }
 
 .cardP .cardP-title span.type
@@ -69,10 +81,11 @@
 .pokemon-id
 {
     position: absolute;
-    top: 20px;
-    right: 40px;
+    top: 0px;
+    right: 10px;
     font-size: 2.5rem;
-    color: rgba( 255,255,255,.2 );
+    color: hsla(0,0%,100%,.2);
+
 }
 
 @media screen and ( max-width: 500px )

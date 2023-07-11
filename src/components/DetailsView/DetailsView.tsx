@@ -8,6 +8,8 @@ import { UIActionTypes } from '../../types/ui.types';
 import { toggleShowPopupAction } from '../../redux/actions/ui.action';
 import PoketCard from '../Card/PoketCard';
 import { Button, Modal } from 'react-bootstrap';
+import Details from '../Details/Details';
+import  BackButton from '../BackButton/BackButton'
 
 
 interface OwnProps {
@@ -27,49 +29,39 @@ interface IDetailsViewDispatch {
 
 interface IModalCardProps {
     show : boolean ,
-    onHide :()=> void
+    pokemon : any
+    onHide :()=> void,
+
 }
 
 
 const  ModalVerticallyCentered : React.FC<IModalCardProps> = (props : IModalCardProps) =>{
-   
+
+const [className, setClassName] = useState('default-background');  
+const classNameReceived = (cl : any) =>{
+        setClassName (cl);
+};  
+const paddedId = '#' + props.pokemon.id.toString().padStart( 3, '000' );
+
+
 return ( 
-    // ReactDOM.createPortal(
-	// 	<React.Fragment>
-	// 	(<div>
-    //     <Overlay hidden={ isHidden } onClick={ closeModal } />
-         
-	// 		<div className={ `details-view-container ${ isHidden && 'hidden' }` } onAnimationEnd={ handleAnimationEnd }>
-	// 			 {/* <BackButton onClick={ closeModal } /> */}
-	// 			 <PoketCard pokemon={ detailsView.selectedPokemon } onClick={{}}/>
-	// 			{/* <Details pokemon={ currentPokemon } />  */}
-    //            <h1>HELLOOOO</h1>
-    //       </div>
-    //       </div>)
-          
-	// 	</React.Fragment>, document.body)
+   
     <Modal
       {...props}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
-        </Modal.Title>
+      <Modal.Header  className={`cardP ${className}`} >
+
+        <PoketCard  pokemon={props.pokemon} onClick={()=>{}} onClassChange={classNameReceived}/>
+        <span className="pokemon-id">{ paddedId }</span>
+        <BackButton onClick={props.onHide}/>
       </Modal.Header>
-      <Modal.Body>
-        <h4>Centered Modal</h4>
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-          dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-          consectetur ac, vestibulum at eros.
-        </p>
+      <Modal.Body className={`bodyP ${className}`}>
+        <Details pokemon={props.pokemon}/>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
-      </Modal.Footer>
+      
     </Modal>
     );
 
@@ -85,28 +77,19 @@ const DetailsViewPage  = (props : Props) =>{
         setIsHidden(!showPopup)
     },[showPopup]);
 
-    const handleAnimationEnd = useCallback( ( animationName:any  ) => {
-		if ( animationName !== 'pull-down-center' ) {
-			return;
-		}
-		setIsHidden( false );
-	} ,[]);
-
-    const closeModal = useCallback(()=>{
-           console.log('123');
-          setIsHidden(true);
-    },[])
-  
+   
     return (
         <React.Fragment>
-            <ModalVerticallyCentered show={!isHidden}
-            onHide={props.onHandleCLoseButton}/>
+            <ModalVerticallyCentered 
+                show={!isHidden}
+                onHide={props.onHandleCLoseButton}
+                pokemon={props.selectedPokemon}/>
         </React.Fragment>
     )
 }
 
 
-const  mapStateToProps:  MapStateToProps<IDetailsView, OwnProps,RootState> = (state: RootState, props:OwnProps) =>{
+const  mapStateToProps:  MapStateToProps<IDetailsView, OwnProps,RootState> = (state: RootState) =>{
       return {
         selectedPokemon: (state.pokemon as PokemonState).selectedPokemon,
         loading: (state.pokemon as PokemonState).selectedPokemon.loading,

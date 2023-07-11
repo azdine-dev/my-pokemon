@@ -1,0 +1,214 @@
+.details
+{
+    background-color: #FFF;
+    color: #333;
+    /* box-shadow: 0 0 10px 0 rgba( 0,0,0,.4 ); */
+    border-radius: 3rem;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+    animation: 0.3s pull-up both ease-out .2s;
+}
+
+.details .pokemon-image
+{
+    position: absolute;
+    bottom: 100%;
+    margin-bottom: -2rem;
+    left: 50%;
+    transform: translateX( -50% );
+    max-width: 30%;
+    height: auto;
+    max-height: 20vh;
+    filter: drop-shadow( 0 0 10px rgba( 0,0,0,.2 ) );
+    animation: 0.3s fade-in ease-out .5s both;
+}
+
+.details .tabs-switch-container
+{
+    margin-bottom: .5rem;
+    border-bottom: 2px solid rgba( 0,0,0,.05 );
+}
+
+.details .tabs-switch-container .tab-switch
+{
+    background: transparent;
+    border: none;
+    font-weight: bold;
+    font-size: 1rem;
+    font-family: inherit;
+    padding: 1rem 1rem;
+    position: relative;
+    color: rgba( 0,0,0,.2 );
+    outline: none;
+    transition: .3s all;
+}
+
+.details .tabs-switch-container .tab-switch.active,
+.details .tabs-switch-container .tab-switch:hover
+{
+    color: inherit;
+}
+
+.details .tabs-switch-container .tab-switch.active::after
+{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3px;
+    top: 100%;
+    margin-top: -.5px;
+    left: 0;
+    position: absolute;
+    background-color: #6C79DB;
+}
+
+.details .tab
+{
+    max-height: 45vh;
+    overflow-y: auto;
+}
+
+.details .tab table
+{
+    width: 100%;
+}
+
+.details .tab table td
+{
+    padding: .5rem;
+    text-transform: capitalize;
+}
+
+
+
+
+.details .tab table td:first-child
+{
+    width: 20%;
+}
+
+.details .tab table td:nth-child( 2 )
+{
+    display: flex;
+    gap :10px;
+    /* align-items: center;
+    justify-content: flex-start; */
+    font-weight: bold;
+}
+
+.details .tab table td:nth-child( 2 ) .range-view
+{
+    width: 90%;
+}
+
+.details .tab-evolution
+{
+    --gap: 40px;
+
+    display: flex;
+    flex-direction: column;
+    gap: var( --gap );
+}
+
+.details .tab-evolution .loader
+{
+    padding: 1em;
+    margin-top: calc( -1 * var( --gap ) );
+}
+
+.error-msg {
+    display: block;
+    text-align: center;
+}
+.evolution-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 4.5vh;
+  }
+  
+  .evolution-container:last-child {
+    margin: 0;
+  }
+  
+  .evolution-container span {
+    display: block;
+  }
+  
+  .evolution-container .poke-img {
+    display: flex;
+    position: relative;
+    width: 140px;
+    height: 140px;
+    background: #f2f2f2; 
+
+    -moz-border-radius: 70px; 
+    -webkit-border-radius: 70px; 
+    border-radius: 70px;
+    cursor: pointer;
+  }
+  
+  .evolution-container .pokeball-bg {
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+  .evolution-container .pokeball-bg::after {
+    height: 100%;
+    background: rgba(0, 0, 0, 0.05);
+  }
+  
+  .evolution-container .poke-img img {
+    display: block;
+    width: 65%;
+    margin: 0 auto;
+  }
+  
+  .evolution-container span {
+    font-weight: 500;
+    text-align: center;
+    text-transform: capitalize;
+    color: #000;
+  }
+  
+  .evolution-container .evolution-level {
+    font-size: 14px;
+  }
+  
+  .evolution-container .arrow {
+    position: relative;
+    display: inline-block;
+    width: 6vw;
+    height: 0.6vw;
+    margin-top: 1vw;
+    background: #313030;
+  }
+  
+  .evolution-container .arrow::after { 
+    content: '';
+    position: absolute;
+    height: 2vw;
+    width: 2vw;
+    right: 1px;
+    top: -0.8vw;
+    border: 0.6vw solid #313030;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    transform: rotate(-40deg);
+  }
+  
+@media screen and ( max-width: 500px )
+{
+    .details .tabs-switch-container .tab-switch
+    {
+        padding: .5rem;
+        font-size: .8rem;
+    }
+
+    .details .tab
+    {
+        font-size: .8rem;
+    }
+}

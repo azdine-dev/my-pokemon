@@ -23,7 +23,6 @@ export class  PokedexBootstrapContainer extends Component<IPokedexResults> {
      render(): React.ReactNode {
        const { pokemons, pagination, onHandleScrollEnd, onHandleGetPokemon} = this.props;
 
-       console.log(this.props, 'propo')
 
        const handleClickAction = (pokemon:any)=>{
             onHandleGetPokemon(pokemon);

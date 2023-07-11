@@ -8,7 +8,6 @@ const Card : React.FC<{pokemon:any, onClick : (pokemon:any)=>void}> = ({pokemon,
      const randomClassName =  getRandonmPokemonType()
      const paddedId = '#' + pokemon.id.toString().padStart( 3, '000' )
      const getPokemon = (pokemon :any )=>{
-           console.log('clicked Pokemon', pokemon)
            onClick(pokemon);    
      }
 

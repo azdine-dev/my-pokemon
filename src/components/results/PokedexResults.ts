@@ -28,8 +28,8 @@ function mapStateToProps (state: RootState) : IPokedexResults {
 const mapDispatchToProps = (dispatch: Dispatch<PokemonActionTypes>) => ({
 
    onHandleGetPokemon:(selectedPokemon :any) => {
-      console.log(selectedPokemon,'mmmm')
       dispatch(toggleShowPopupAction());
+      dispatch(selectPokemonAction(selectedPokemon));
       dispatch(getPokemonAction(selectedPokemon));
     },
    onHandleScrollEnd(pagination :any) {

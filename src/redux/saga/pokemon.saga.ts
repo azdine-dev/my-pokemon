@@ -1,7 +1,7 @@
-import { put, call,fork,all} from 'redux-saga/effects'
+import { put, call,fork,all, PutEffect} from 'redux-saga/effects'
 
 import { PokeFetch} from '../../api'
-import { getPokemonDisplayImageFromID, getPokemonBaseSpriteFromURL, getIDfromURL,getURLFromPayload, getPokemonAnimatedSpriteFromURL } from '../../utils/pokemon-operations'
+import { getPokemonDisplayImageFromID, getPokemonBaseSpriteFromURL, getIDfromURL,getURLFromPayload, getPokemonAnimatedSpriteFromURL, getPokemonDisplayImageFromURL } from '../../utils/pokemon-operations'
 import * as types from '../../constants/action-types.contstants'
 import { Pokemon } from '../../types/pokemon.types'
 
@@ -113,31 +113,25 @@ export function* getPokemonSaga( selectedPokemon  :any) :any {
       species:fetchedPokemon.species,
       moves:fetchedPokemon.moves.map(({ move } :any)=>(move)),
     }
-    yield[
-      put({ type: types.GET_POKEMON_SUCCESS, pokemon: filteredPokemon })
-    ]
+    const allCalls: PutEffect[] = [];
+    allCalls.push(put({ type: types.GET_POKEMON_SUCCESS, pokemon: filteredPokemon }));
 
     const fetchedPokemonSpecies = yield getPokemonSpecies(filteredPokemon)
-    yield[
-      put({ type: types.GET_POKEMON_SPECIES_SUCCESS, species: fetchedPokemonSpecies })
-    ]
+
+    allCalls.push(put({ type: types.GET_POKEMON_SPECIES_SUCCESS, species: fetchedPokemonSpecies }))
 
     if(fetchedPokemonSpecies.evolution_chain){
       const fetchedPokemonEvoChain = yield getPokemonEvolutionChain(fetchedPokemonSpecies)
-      yield[
-        put({type: types.GET_POKEMON_EVO_CHAIN_SUCCESS, evolution_chain:fetchedPokemonEvoChain})
-      ]
+      allCalls.push(put({type: types.GET_POKEMON_EVO_CHAIN_SUCCESS, evolution_chain:fetchedPokemonEvoChain}))
     }
 
     const fetchedPokemonTypes= yield getPokemonTypes(filteredPokemon)
-    yield[
-      put({type: types.GET_POKEMON_TYPE_SUCCESS, types: fetchedPokemonTypes})
-    ]
-
+    allCalls.push(put({type: types.GET_POKEMON_TYPE_SUCCESS, types: fetchedPokemonTypes}))
+    
     const fetchedPokemonAbilities= yield getPokemonAbilities(filteredPokemon)
-    yield[
-      put({type: types.GET_POKEMON_ABILITY_SUCCESS, abilities: fetchedPokemonAbilities})
-    ]
+    allCalls.push(put({type: types.GET_POKEMON_ABILITY_SUCCESS, abilities: fetchedPokemonAbilities}));
+
+    yield all(allCalls)
   }catch (error){
     console.log(error)
     yield put({ type: 'GET_POKEMON_ERROR', error })
@@ -145,11 +139,11 @@ export function* getPokemonSaga( selectedPokemon  :any) :any {
 }
 
 function* getPokemonAbilities(pokemon:any) :any{
-  var fetchedPokemonAbilities=[]
+  const fetchedPokemonAbilities=[]
   for(let index in pokemon.abilities){
     let ability=pokemon.abilities[index]
     let abilityClone={...ability}
-    var fetchedAbility = yield call(PokeFetch, ability.ability.url)
+    const fetchedAbility = yield call(PokeFetch, ability.ability.url)
     abilityClone.ability={...abilityClone.ability, effect: fetchedAbility.effect_entries[0].effect}
     fetchedPokemonAbilities.push(abilityClone)
   }
@@ -158,29 +152,36 @@ function* getPokemonAbilities(pokemon:any) :any{
 
 function* getPokemonSpecies(pokemon :any) :any{
   const fetchedPokemonSpecies = yield call(PokeFetch, pokemon.species.url)
-  var flavor_text_entries = fetchedPokemonSpecies.flavor_text_entries
-  var description =''
+  let flavor_text_entries = fetchedPokemonSpecies.flavor_text_entries
+  let description =''
   if(flavor_text_entries){
-    for(var i =0; i< flavor_text_entries.length; i++){
+    for(let i =0; i< flavor_text_entries.length; i++){
       if(flavor_text_entries[i].language.name==='en'){
         description=flavor_text_entries[i].flavor_text
-        break
+        break;
       }
     }
   }
-  var filteredPokemonSpecies={description}
-//   filteredPokemonSpecies["habitat"] = fetchedPokemonSpecies.habitat ? fetchedPokemonSpecies.habitat.name :''
-//   fetchedPokemonSpecies.habitat ? filteredPokemonSpecies["habitat"]= fetchedPokemonSpecies.habitat.name :''
-//   fetchedPokemonSpecies.color ? filteredPokemonSpecies["color"]= fetchedPokemonSpecies.color.name :''
-//   fetchedPokemonSpecies.shape ? filteredPokemonSpecies["shape"] = fetchedPokemonSpecies.shape.name :''
-//   fetchedPokemonSpecies.egg_groups ? filteredPokemonSpecies["egg_groups"] = fetchedPokemonSpecies.egg_groups.map(({ name })=>(name)) : ''
-//   fetchedPokemonSpecies.evolution_chain ? fetchedPokemonSpecies["evolution_chain"] = fetchedPokemonSpecies.evolution_chain: ''
-//   fetchedPokemonSpecies.gender_rate.toString() ? filteredPokemonSpecies["gender_rate"] = fetchedPokemonSpecies.gender_rate.toString() : ''
-//   fetchedPokemonSpecies.hatch_counter ? filteredPokemonSpecies["hatch_counter"] = fetchedPokemonSpecies.hatch_counter:''
-//   fetchedPokemonSpecies.capture_rate ? filteredPokemonSpecies["capture_rate"] = fetchedPokemonSpecies.capture_rate : ''
-//   fetchedPokemonSpecies.growth_rate ? filteredPokemonSpecies["growth_rate"] = fetchedPokemonSpecies.growth_rate.name : ''
-//   fetchedPokemonSpecies.generation ? filteredPokemonSpecies["generation"] = fetchedPokemonSpecies.generation.name : ''
-//   fetchedPokemonSpecies.evolution_chain ? filteredPokemonSpecies["evolution_chain"] = fetchedPokemonSpecies.evolution_chain : ''
+
+  type PokemonSpecie = {
+    [key :string] :any;
+  }
+  let filteredPokemonSpecies :PokemonSpecie = {};
+  filteredPokemonSpecies.description = {description};
+  filteredPokemonSpecies.habitat = fetchedPokemonSpecies.habitat ? fetchedPokemonSpecies.habitat.name :'';
+
+
+  filteredPokemonSpecies["habitat"] = fetchedPokemonSpecies.habitat ? fetchedPokemonSpecies.habitat.name :''
+  fetchedPokemonSpecies.color ? filteredPokemonSpecies["color"]= fetchedPokemonSpecies.color.name :''
+  fetchedPokemonSpecies.shape ? filteredPokemonSpecies["shape"] = fetchedPokemonSpecies.shape.name :''
+  fetchedPokemonSpecies.egg_groups ? filteredPokemonSpecies["egg_groups"] = fetchedPokemonSpecies.egg_groups.map(({ name } :any)=>(name)) : ''
+  fetchedPokemonSpecies.evolution_chain ? fetchedPokemonSpecies["evolution_chain"] = fetchedPokemonSpecies.evolution_chain: ''
+  fetchedPokemonSpecies.gender_rate.toString() ? filteredPokemonSpecies["gender_rate"] = fetchedPokemonSpecies.gender_rate.toString() : ''
+  fetchedPokemonSpecies.hatch_counter ? filteredPokemonSpecies["hatch_counter"] = fetchedPokemonSpecies.hatch_counter:''
+  fetchedPokemonSpecies.capture_rate ? filteredPokemonSpecies["capture_rate"] = fetchedPokemonSpecies.capture_rate : ''
+  fetchedPokemonSpecies.growth_rate ? filteredPokemonSpecies["growth_rate"] = fetchedPokemonSpecies.growth_rate.name : ''
+  fetchedPokemonSpecies.generation ? filteredPokemonSpecies["generation"] = fetchedPokemonSpecies.generation.name : ''
+  fetchedPokemonSpecies.evolution_chain ? filteredPokemonSpecies["evolution_chain"] = fetchedPokemonSpecies.evolution_chain : ''
   return filteredPokemonSpecies
 }
 
@@ -206,25 +207,25 @@ function* getPokemonEvolutionChain(pokemon :Pokemon) :any{
                         id:getIDfromURL(currentChain.species.url),
                         displaySprite:getPokemonBaseSpriteFromURL(currentChain.species.url),
                         animatedSprite: getPokemonAnimatedSpriteFromURL(currentChain.species.url),
-                        displayImage:getPokemonDisplayImageFromID(currentChain.species.id)}]
+                        displayImage:getPokemonDisplayImageFromURL(currentChain.species.url)}]
   evolutionTable.push(currentStage)
-  var nextChain = currentChain.evolves_to
+  let nextChain = currentChain.evolves_to
   while(nextChain && nextChain.length>0){
       currentChain=nextChain
       nextChain= []
       currentStage=[]
-      for(var i=0; i<currentChain.lengthi; i++){
+      for(let i=0; i<currentChain.length; i++){
           if(currentChain[i]){
             currentStage.push({...currentChain[i].species,
                                   id:getIDfromURL(currentChain[i].species.url),
                                   displaySprite:getPokemonBaseSpriteFromURL(currentChain[i].species.url),
                                   animatedSprite: getPokemonAnimatedSpriteFromURL(currentChain[i].species.url),
-                                  displayImage:getPokemonDisplayImageFromID(currentChain[i].species.name),
+                                  displayImage:getPokemonDisplayImageFromURL(currentChain[i].species.url),
                                   evolution_details: currentChain[i].evolution_details,
                                   prevNodes: currentChain[i].prevNodes ? currentChain[i].prevNodes : 0 ,
                                 })
             if(currentChain[i].evolves_to){
-              var nextNodes = currentChain[i].evolves_to.map((evo:any)=>({
+              let nextNodes = currentChain[i].evolves_to.map((evo:any)=>({
                 ...evo,
                 prevNodes:currentStage.length-1
               }))
