@@ -4,7 +4,7 @@ import { PokemonState } from '../../redux/reducers/pokemon.reducer'
 import { connect } from 'react-redux'
 import { PokemonActionTypes } from '../../types/pokemon.types'
 import { addPokemonAction, getPokemonAction, selectPokemonAction } from '../../redux/actions/pokemon.action'
-import { IPokedexResults, PokedexBootstrapContainer } from './PokedexBootstrapContainer'
+import  PokedexBootstrapContainer, { IPokedexResults}  from './PokedexBootstrapContainer'
 import { toggleShowPopupAction } from '../../redux/actions/ui.action'
 
 
