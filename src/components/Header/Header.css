@@ -342,3 +342,28 @@ a{
     z-index: 9996;
   }
 }
+
+/* Style for the search bar container */
+.search-bar {
+  position: relative; /* Create a relative positioning context */
+  margin-left: auto; /* Push the search bar to the right side */
+  padding: 5em; /* Add some padding around the search bar */
+}
+
+/* Style for the search input */
+.search-bar input[type="text"] {
+  padding: 8px 30px 8px 10px; /* Add padding inside the input (adjust the values as needed) */
+  border: 1px solid #ccc; /* Add a border to the input */
+  border-radius: 20px; /* Round the corners of the input */
+  width: 400px; /* Set a fixed width for the input (adjust as needed) */
+  font-size: 16px; /* Set the font size for the input (adjust as needed) */
+  background-color: #f7f7f7; /* Set a background color for the input (adjust as needed) */
+}
+
+
+
+/* Style the input on focus */
+.search-bar input[type="text"]:focus {
+  outline: none; /* Remove the default focus outline */
+  box-shadow: 0 0 5px #007bff; /* Add a shadow when the input is focused */
+}

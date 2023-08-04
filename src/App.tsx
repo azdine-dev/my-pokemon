@@ -1,6 +1,6 @@
 import {Provider} from 'react-redux'
 import store from './redux/store'
-import Pokedex from './container/pokedex/pokedex'
+import Pokedex from './container/pokedex/Pokedex'
 import './App.css'
 import DetailsView from './components/DetailsView/DetailsView'
 

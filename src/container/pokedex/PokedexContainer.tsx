@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import classes from  './pokedex.module.css'
 import { Dispatch, Action, AnyAction } from 'redux';
-import PokedexHeader from '../../components/Header/PokedexHeader';
 import PokedexFooter from '../../components/Footer/PodexFooter';
 import { fetchPokemonAction } from '../../redux/actions/pokemon.action';
 import PokedexControl from '../../components/results/PokedexController';
 import Intro from '../../components/Intro/Intro';
+import PokedexHeader from '../../components/Header/PokedexHeader';
 
 
 export interface IPokedex<A extends Action = AnyAction> {
@@ -15,13 +15,17 @@ export interface IPokedex<A extends Action = AnyAction> {
     selectedPokemon : any
     dispatch? : Dispatch<A>;
 }
-export class  PokedexContainer extends Component<IPokedex> {
-   componentDidMount(){
-      this.props.dispatch?.(fetchPokemonAction(this.props.ui.searchPayload));
-   }
 
-    render(): React.ReactNode {
-      const { pokemons, selectedPokemon, ui } = this.props;
+ 
+const PokedexContainer =(props:IPokedex) => {
+
+   useEffect(()=>{
+       props.dispatch?.(fetchPokemonAction(props.ui.searchPayload));
+   },[]);
+
+   const { pokemons, selectedPokemon, ui } = props;
+  
+     
       
       return(
        
@@ -30,13 +34,12 @@ export class  PokedexContainer extends Component<IPokedex> {
                 <Intro/>
                   
                 <PokedexControl pokemons={pokemons} ui={ui}/>
-                  
+               
                 <PokedexFooter/>
 
              </div>)
       )  
-    } 
-   
-        
-}
+} 
 
+
+export default PokedexContainer;

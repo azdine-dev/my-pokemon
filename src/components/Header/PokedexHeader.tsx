@@ -1,15 +1,33 @@
-import React, { useLayoutEffect, useRef } from 'react';
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import { ConnectedProps, MapDispatchToProps, connect } from "react-redux";
 
 
 import './Header.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { aN, bN, gN, rN } from '../../utils/inline-styles';
-const PokedexHeader = ()=>{
-    const navColor = '#2c3e50'
-    
- 
+import { Dispatch, Action, AnyAction } from 'redux';
+import { searchPokemonAction } from '../../redux/actions/pokemon.action';
+import { PokemonActionTypes } from '../../types/pokemon.types';
+
+interface PokedexHeaderProps extends PropsFromRedux {}
+
+
+
+const PokedexHeader = (props : PokedexHeaderProps)=>{
+
+  const [time, setTime] = useState<NodeJS.Timeout  | null>(null);
   
+    const handleSubmit = (e :any)=>{
+        e.preventDefault();
+        props.onSearchChanged(e.target.value)
+    }
+    const inputChangeHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+      if (time) clearTimeout(time); // Clear the previous timeout if it exists
+      setTime(setTimeout(() => {
+        props.onSearchChanged(e.target.value); // Dispatch the search action here
+      }, 1500));
+    }, [time, props.onSearchChanged]);
+         
+    
+    
   return (<div>
 <header id="header" className="headerP d-flex align-items-center sticked">
 
@@ -20,11 +38,18 @@ const PokedexHeader = ()=>{
     <h1>PokedexM</h1>
   </a>
   <nav id="navbar" className="navbar">
+    <div className="search-bar">
+      <form onSubmit={handleSubmit}>
+        <input type="text"  onChange={(e)=> inputChangeHandler(e)} 
+        placeholder="What pokemon are you looking for ?" />
+      </form>
+    </div>
     <ul>
       <li><a href="#hero">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    
   </nav>
 
   <i className="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
@@ -32,15 +57,22 @@ const PokedexHeader = ()=>{
 
 </div>
 </header>
-
-     {/* <a href="https://github.com/azdine-dev/my-pokemon"
-        target="_blank">
-     <img style={{position : 'absolute', top:0, right : 0, border : 0, zIndex : 1031}}
-         src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" 
-         alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"/>
-     </a> */}
   </div>
   )
 }
 
-export default PokedexHeader;
+const mapDispatchToProps = (dispatch: Dispatch<PokemonActionTypes>) => ({
+  
+   onSearchChanged: (payload:any) =>{
+     dispatch(searchPokemonAction(payload));
+   },
+
+});
+
+const connector = connect(null, mapDispatchToProps);
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+
+export default connector(PokedexHeader)
+
+

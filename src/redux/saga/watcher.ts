@@ -1,6 +1,6 @@
 import { takeLatest } from 'redux-saga/effects';
 import * as types from '../../constants/action-types.contstants';
-import { addPokemonSaga, fetchPokemonSaga, getPokemonSaga } from './pokemon.saga';
+import { addPokemonSaga, fetchPokemonSaga, getPokemonSaga , searchPokemonSaga} from './pokemon.saga';
 import { fetchSearchPayloadListSaga } from './ui.saga';
 
 
@@ -14,6 +14,10 @@ export function* watchAddPokemon() {
 
 export function* watchGetPokemon() {
   yield takeLatest(types.GET_POKEMON_REQUEST, getPokemonSaga);
+}
+
+export function* watchSearchPokemon(){
+   yield takeLatest(types.SEARCH_POKEMON, searchPokemonSaga )
 }
 
 export function* watchFetchSearchPayloadList() {

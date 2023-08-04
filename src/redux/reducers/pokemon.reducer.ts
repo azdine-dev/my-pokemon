@@ -18,8 +18,11 @@ export interface PokemonState {
           return {...state, pokemons: action.pokemons }
         case types.ADD_POKEMON_SUCCESS:
           const newPokemons = state.pokemons.concat(...action.pokemons as any[]);
-          console.log(newPokemons, 'newPokemons');
           return {...state, pokemons:newPokemons}
+
+        case types.SEARCH_POKEMON_SUCCESS:
+          return {...state, pokemons :action.pokemons} 
+
         case types.SELECTED_POKEMON:
           return { ...state, selectedPokemon: {...action.pokemon, loading:true} }
         case types.GET_POKEMON_SUCCESS:
@@ -36,7 +39,9 @@ export interface PokemonState {
           return { ...state, selectedPokemon: {...state.selectedPokemon, displaySprite: URL.POKEMON_SPRITES_NODATA_URL} }
         case types.POKEMON_IMAGE_ERROR:
           return { ...state, selectedPokemon: {...state.selectedPokemon, displaySprite: URL.POKEMON_SPRITES_NODATA_URL} }
-        default:
+        case types.SEARCH_POKEMON_FAILURE :
+            return {...state, pokemons :[]}
+          default:
           return state
     }
 }

@@ -2,7 +2,8 @@ import {SELECTED_POKEMON,
         FETCH_POKEMON_REQUEST,
         ADD_POKEMON_REQUEST,
         GET_POKEMON_REQUEST,
-        POKEMON_SPRITE_ERROR
+        POKEMON_SPRITE_ERROR,
+        SEARCH_POKEMON,
 
     }  from '../../constants/action-types.contstants'
 export const selectPokemonAction = (pokemon :any) => ({
@@ -24,6 +25,14 @@ export const getPokemonAction = (selectedPokemon :any) => ({
   type:GET_POKEMON_REQUEST,
   selectedPokemon
 });
+
+export const searchPokemonAction = (querySearch :string) => ({
+     
+  type : SEARCH_POKEMON,
+  payload : {query: querySearch}
+     
+})
+
 
 export const spriteErrorAction = (selectedPokemon :any) => ({
   type:POKEMON_SPRITE_ERROR,

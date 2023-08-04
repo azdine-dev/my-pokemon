@@ -1,4 +1,4 @@
-import { watchAddPokemon, watchFetchPokemon, watchFetchSearchPayloadList, watchGetPokemon } from "./watcher";
+import { watchAddPokemon, watchFetchPokemon, watchFetchSearchPayloadList, watchGetPokemon, watchSearchPokemon } from "./watcher";
 import { fork,all } from 'redux-saga/effects';
 
 export default function* rootSaga() {
@@ -7,7 +7,7 @@ export default function* rootSaga() {
             fork(watchAddPokemon),
             fork(watchGetPokemon),
             fork(watchFetchSearchPayloadList),
-
+            fork(watchSearchPokemon)
           ]);
 }
 

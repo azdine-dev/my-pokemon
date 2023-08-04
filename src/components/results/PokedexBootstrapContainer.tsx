@@ -17,8 +17,9 @@ export interface IPokedexResults  {
 
 
 const PokedexBootstrapContainer :React.FC<IPokedexResults> = (props :IPokedexResults) =>{
-    const [poks, setPoks] = useState(props.pokemons); 
     const { pokemons, pagination, onHandleScrollEnd, onHandleGetPokemon} = props;
+    const [poks, setPoks] = useState(pokemons); 
+
     const handleClickAction = (pokemon:any)=>{
             onHandleGetPokemon(pokemon);
     }
@@ -34,9 +35,9 @@ const PokedexBootstrapContainer :React.FC<IPokedexResults> = (props :IPokedexRes
        return(
                         <section id="portfolio" className="portfolio sections-bg">
                          <div className="container" data-aos="fade-up">
-                          <Search onSearch = {receiveQuery}/>
+                          {/* <Search onSearch = {receiveQuery}/> */}
                           <GridSystem colCount={3} md={4}>
-                             {poks
+                             {pokemons
                                .sort((a, b) => a.id - b.id)
                                .map((el,index) => (
                                <Card pokemon={el} key ={index} onClick = {handleClickAction}/>))

@@ -1,4 +1,4 @@
-import { put, call,fork,all, PutEffect} from 'redux-saga/effects'
+import { put, call,fork,all, PutEffect, delay} from 'redux-saga/effects'
 
 import { PokeFetch} from '../../api'
 import { getPokemonDisplayImageFromID, getPokemonBaseSpriteFromURL, getIDfromURL,getURLFromPayload, getPokemonAnimatedSpriteFromURL, getPokemonDisplayImageFromURL } from '../../utils/pokemon-operations'
@@ -138,6 +138,33 @@ export function* getPokemonSaga( selectedPokemon  :any) :any {
   }
 }
 
+export function* searchPokemonSaga(action:any) :any {
+   try {
+    const {payload} =action
+    const url = getURLFromPayload({query:'pokemon',id:payload.query})
+
+    const response = yield call(PokeFetch, url);
+    const pokemonFetched = {
+      id: response.id,
+      name : response.name,
+      url : response.url,
+      displayImage: getPokemonDisplayImageFromID(response.id),
+      displaySprite: getPokemonBaseSpriteFromURL(url),
+      animatedSprite: getPokemonAnimatedSpriteFromURL(url)
+    }
+    const pokemons = [];
+    pokemons.push(pokemonFetched);
+
+
+    yield all([
+      put ({type : types.SEARCH_POKEMON_SUCCESS,  pokemons})])
+
+   } catch (error) {
+      
+    yield put({type : types.SEARCH_POKEMON_FAILURE, error })
+   }
+} 
+
 function* getPokemonAbilities(pokemon:any) :any{
   const fetchedPokemonAbilities=[]
   for(let index in pokemon.abilities){
@@ -203,7 +230,7 @@ function* getPokemonEvolutionChain(pokemon :Pokemon) :any{
   var filteredPokemonEvoChain={}
   var evolutionTable=[]
   var currentChain=fetchedPokemonEvoChain.chain
-  var currentStage=[{...currentChain.species,
+  var currentStage:any=[{...currentChain.species,
                         id:getIDfromURL(currentChain.species.url),
                         displaySprite:getPokemonBaseSpriteFromURL(currentChain.species.url),
                         animatedSprite: getPokemonAnimatedSpriteFromURL(currentChain.species.url),

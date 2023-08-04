@@ -8,7 +8,7 @@ type SearchState = {
 
 const   Search : React.FC<{onSearch : (query :string)=> void}> = ({onSearch}) =>{
 
-       const [query, setQuery] = useState('');
+      const [query, setQuery] = useState('');
      
       const handleSubmit = (e :any)=>{
            e.preventDefault();

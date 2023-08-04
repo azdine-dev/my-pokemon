@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { PokemonState } from "../../redux/reducers/pokemon.reducer";
-import { IPokedex, PokedexContainer } from "./pokdexContainer";
+import PokedexContainer, { IPokedex } from "./PokedexContainer";
 
 
 
